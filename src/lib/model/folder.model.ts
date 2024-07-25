@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 const folderSchema = new mongoose.Schema(
 	{
+    userid:{type:String,required:true},
 		title: { type: String, required: true, unique: true },
-		category: { type: String, required: true, unique: true },
-		folder_style: { type: String, required: true, unique: true }
+		type: { type: String, required: true}
 	},
 	{ timestamps: true }
 );

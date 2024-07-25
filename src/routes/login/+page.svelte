@@ -37,7 +37,6 @@
 			if (result?.status < 400) {
 				toast.success('You are signed in.');
 			}
-			console.log(result);
 			update();
 		};
 	};

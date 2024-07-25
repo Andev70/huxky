@@ -3,18 +3,17 @@
 	import * as Dialog from '$lib/shadcn/ui/dialog/';
 	import Button from '$lib/shadcn/ui/button/button.svelte';
 	import { PlusIcon } from 'lucide-svelte';
-	import * as Select from '$lib/shadcn/ui/select';
 	import Label from '$lib/shadcn/ui/label/label.svelte';
 	import Input from '$lib/shadcn/ui/input/input.svelte';
+	import { toast } from 'svelte-sonner';
+	import { goto } from '$app/navigation';
 	let selectedType: any = '';
 	let folderTitle = '';
 	let titleError = '';
 	let typeError = '';
-
+	let isPending = false;
 	$: if (selectedType) typeError = '';
 	$: if (folderTitle) titleError = '';
-	$: if (!folderTitle) titleError = 'Foolder title must be 4 chars long';
-	$: if (!selectedType) typeError = 'Please select a folder type';
 	const fruits = [
 		{ value: 'apple', label: 'Apple' },
 		{ value: 'banana', label: 'Banana' },
@@ -23,18 +22,32 @@
 		{ value: 'pineapple', label: 'Pineapple' }
 	];
 	const onSubmit = ({ formData, cancel }: { formData: any; cancel: any }) => {
-		formData.append('type', selectedType);
 		const title = formData.get('title');
 		const type = formData.get('type');
+		if (title && type) {
+			isPending = true;
+			toast.info('Proccessing please wait...');
+		}
 		if (!title) titleError = 'folder title must contain at least 4 chars';
 		if (!type) typeError = 'please select a type';
+
 		if (typeError || titleError) {
 			cancel();
 		}
 		return ({ result, update }: { result: any; update: any }) => {
-			console.log(result);
-			selectedType = '';
-			update({ reset: true });
+			if (result?.type === 'redirect') {
+				isPending = true;
+			}
+			if (result?.status >= 400) {
+				isPending = false;
+				toast.error(result?.data?.message);
+			} else {
+				isPending = false;
+				folderTitle = '';
+				selectedType = '';
+				toast.success('folder created successfully');
+				update();
+			}
 		};
 	};
 </script>
@@ -56,25 +69,16 @@
 		<form class="w-full" action="?/createFolder" method="post" use:enhance={onSubmit}>
 			<div class="flex w-full flex-col gap-y-2">
 				<Label class="" for="type">Folder type</Label>
-				<Select.Root
-					onSelectedChange={(v) => {
-						// @ts-ignore
-						selectedType = v.value;
-					}}
+				<select
+					name="type"
+					id="type"
+					bind:value={selectedType}
+					class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 pr-3 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 				>
-					<Select.Trigger class="w-full" name="type">
-						<Select.Value placeholder="Select a fruit" />
-					</Select.Trigger>
-					<Select.Content id="type">
-						<Select.Group id="type">
-							<Select.Label id="type">Fruits</Select.Label>
-							{#each fruits as fruit}
-								<Select.Item value={fruit.value} label={fruit.label}>{fruit.label}</Select.Item>
-							{/each}
-						</Select.Group>
-					</Select.Content>
-					<Select.Input name="favoriteFruit" />
-				</Select.Root>
+					{#each fruits as item}
+						<option value={item.value}>{item.label}</option>
+					{/each}
+				</select>
 				<p class="text-[12px] text-red-300">{typeError ?? ''}</p>
 			</div>
 			<div class="title mt-3 flex w-full flex-col gap-y-2">
@@ -84,7 +88,7 @@
 				<p class="text-[12px] text-red-300">{titleError ?? ''}</p>
 			</div>
 			<div class="submitter mt-3 w-full">
-				<Button class="w-full" type="submit">Create Folder</Button>
+				<Button disabled={isPending} class="w-full" type="submit">Create Folder</Button>
 			</div>
 		</form>
 	</Dialog.Content>

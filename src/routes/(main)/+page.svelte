@@ -1,5 +1,4 @@
 <script lang="ts">
-	// eruda console added
 	import CreateFolder from '$lib/components/modal/CreateFolder.svelte';
 	import { BookOpenCheck, NotepadText, SquareCheck } from 'lucide-svelte';
 </script>
