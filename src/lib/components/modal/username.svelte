@@ -2,7 +2,7 @@
 	import Button from '$lib/shadcn/ui/button/button.svelte';
 </script>
 
-<div class="fixed z-[50] flex h-dvh w-dvw items-center justify-center px-5">
+<div class="fixed z-[50] flex h-max w-dvw justify-center px-5">
 	<div
 		class="relative inline-block transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left align-bottom shadow-xl transition-all dark:bg-gray-900 sm:my-8 sm:w-full sm:max-w-sm sm:p-6 sm:align-middle"
 	>
@@ -37,7 +37,7 @@
 			</div>
 		</div>
 
-		<form class="mt-4" method="POST">
+		<form class="mt-4" method="POST" action="?/setCookies">
 			<label class="text-sm text-gray-700 dark:text-gray-200" for="username">Username</label>
 
 			<div class="-mx-1 mt-2 flex items-center">
@@ -47,10 +47,10 @@
 					class="mx-1 block h-11 flex-1 rounded-md border border-gray-200 bg-white px-4 text-sm text-gray-700 focus:border-orange-400 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
 				/>
 			</div>
-		</form>
 
-		<div class="mt-3 sm:-mx-2 sm:mt-6 sm:flex sm:items-center">
-			<Button>Get started</Button>
-		</div>
+			<div class="mt-3 sm:-mx-2 sm:mt-6 sm:flex sm:items-center">
+				<Button class="w-full" type="submit">Get started</Button>
+			</div>
+		</form>
 	</div>
 </div>
