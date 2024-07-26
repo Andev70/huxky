@@ -3,7 +3,9 @@
 	import logo from '$lib/assets/logo/logo_svg.svg';
 	import Button from '$lib/shadcn/ui/button/button.svelte';
 	import Input from '$lib/shadcn/ui/input/input.svelte';
+	import { Loader } from 'lucide-svelte';
 	import { toast } from 'svelte-sonner';
+	import { fade } from 'svelte/transition';
 
 	let formError = '';
 	let emailError = '';
@@ -135,7 +137,16 @@
 			</div>
 
 			<div class="mt-6">
-				<Button disabled={isPending} type="submit" class="w-full">Sign In</Button>
+				<Button disabled={isPending} class="w-full" type="submit">
+					{#if !isPending}
+						<span in:fade> Create Folder </span>
+					{:else}
+						<span in:fade class="flex items-center gap-x-3">
+							<Loader strokeWidth={1.5} size={20} class=" animate-spin stroke-white" />
+							Processing wait...
+						</span>
+					{/if}
+				</Button>
 			</div>
 
 			<div class="mt-4 flex items-center justify-between">

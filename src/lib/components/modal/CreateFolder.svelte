@@ -2,11 +2,12 @@
 	import { enhance } from '$app/forms';
 	import * as Dialog from '$lib/shadcn/ui/dialog/';
 	import Button from '$lib/shadcn/ui/button/button.svelte';
-	import { PlusIcon } from 'lucide-svelte';
+	import { Loader, PlusIcon } from 'lucide-svelte';
 	import Label from '$lib/shadcn/ui/label/label.svelte';
 	import Input from '$lib/shadcn/ui/input/input.svelte';
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
+	import { fade } from 'svelte/transition';
 	let selectedType: any = '';
 	let folderTitle = '';
 	let titleError = '';
@@ -88,7 +89,16 @@
 				<p class="text-[12px] text-red-300">{titleError ?? ''}</p>
 			</div>
 			<div class="submitter mt-3 w-full">
-				<Button disabled={isPending} class="w-full" type="submit">Create Folder</Button>
+				<Button disabled={isPending} class="w-full" type="submit">
+					{#if !isPending}
+						<span in:fade> Create Folder </span>
+					{:else}
+						<span in:fade class="flex items-center gap-x-3">
+							<Loader strokeWidth={1.5} size={20} class=" animate-spin stroke-white" />
+							Processing wait...
+						</span>
+					{/if}
+				</Button>
 			</div>
 		</form>
 	</Dialog.Content>
