@@ -6,7 +6,6 @@
 	import Label from '$lib/shadcn/ui/label/label.svelte';
 	import Input from '$lib/shadcn/ui/input/input.svelte';
 	import { toast } from 'svelte-sonner';
-	import { goto } from '$app/navigation';
 	import { fade } from 'svelte/transition';
 	let selectedType: any = '';
 	let folderTitle = '';

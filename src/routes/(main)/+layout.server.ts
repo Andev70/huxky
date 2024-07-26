@@ -1,18 +1,16 @@
-import { connect } from '$lib/db/connect';
-import User from '$lib/model/user.model';
+import { JWT_SECRET } from '$env/static/private';
 import { redirect, type ServerLoad } from '@sveltejs/kit';
-
+import jwt from "jsonwebtoken"
 export const load: ServerLoad = async ({ cookies }) => {
 
 	const token:any = cookies.get('key');
  if(!token){
     redirect(302,"/login")
   }
- connect()
-  const user = await User.findById(token)
-  if(!user){
+const jwt_verify:any=jwt.verify(token, JWT_SECRET)
+  if(!jwt_verify){
+    cookies.delete("key", {path:"/"})
     redirect(302,"/login")
   }
-
-	return {username:user.username};
+	return {username:jwt_verify.username};
 };

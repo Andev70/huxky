@@ -3,7 +3,8 @@ import { fail, redirect, type Actions } from '@sveltejs/kit';
 import { connect } from '$lib/db/connect';
 import bcrypt from "bcryptjs"
 import User from '$lib/model/user.model';
-
+import jwt from "jsonwebtoken"
+import { JWT_SECRET } from '$env/static/private';
 export const actions: Actions = {
 
 	login: async ({ request, cookies }) => {
@@ -33,9 +34,9 @@ connect()
 				message: 'Invalid username or password.'
 			});
 		}
-
+const jwt_token = jwt.sign({id:user?.id,username:user?.username},JWT_SECRET,{expiresIn:"30d"})
 		// Successful authentication
-		cookies.set('key', user._id, { maxAge: 30 * 24 * 60 * 60 * 1000, path: '/', httpOnly: true });
+		cookies.set('key', jwt_token, { maxAge: 30 * 24 * 60 * 60 * 1000, path: '/', httpOnly: true });
 		redirect(300, '/');
 	},
 };
