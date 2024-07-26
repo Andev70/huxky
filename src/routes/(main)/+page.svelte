@@ -3,6 +3,9 @@
 	import { BookOpenCheck, NotepadText, SquareCheck } from 'lucide-svelte';
 </script>
 
+<svelte:head>
+	<title>HUXY</title>
+</svelte:head>
 <section class="grid w-full grid-cols-2 gap-x-3 gap-y-4 px-4">
 	<div class="folder h-full w-full overflow-hidden rounded-[20px] bg-gray-100">
 		<a

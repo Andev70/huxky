@@ -44,14 +44,19 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Huxy | Login</title>
+	<meta name="description" content="login to access all the features of huxy" />
+	<meta name="keywords" content="login, huxy login, huxy-login, huxy" />
+</svelte:head>
 <div class="login flex h-dvh w-dvw items-center justify-center px-4">
 	<form
 		action="?/login"
 		method="post"
-		class="mx-auto flex w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg dark:bg-gray-800 lg:max-w-4xl"
+		class="mx-auto flex w-full max-w-sm overflow-hidden rounded-lg border border-border bg-white drop-shadow-lg dark:bg-gray-800 lg:max-w-4xl"
 		use:enhance={onSubmit}
 	>
-		<div class="w-full px-6 py-8 md:px-8 lg:w-1/2">
+		<div class="w-full px-6 pb-6 pt-3 md:px-8 lg:w-1/2">
 			<div class="mx-auto flex items-center justify-center">
 				<img class="h-20 w-20" src={logo} alt="" />
 			</div>
