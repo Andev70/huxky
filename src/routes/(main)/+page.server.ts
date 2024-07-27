@@ -30,6 +30,7 @@ export const actions: Actions = {
 			if (duplicateFolder) {
 				return fail(400, { message: 'folder already exists' });
 			}
+    
 			const folder = await Folder.create({ type, userid:jwt_verify?.id, title: name });
 			if (!folder) {
 				return fail(400, { message: 'please try later' });

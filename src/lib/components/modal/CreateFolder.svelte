@@ -29,7 +29,7 @@
 		{ value: 'pineapple', label: 'Pineapple' }
 	];
 	const onSubmit = ({ formData, cancel }: { formData: any; cancel: any }) => {
-		formData.append('type', selectedType);
+		formData.append('type', selectedType.value);
 		const title = formData.get('title');
 		const type = formData.get('type');
 		if (title && type) {
