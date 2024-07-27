@@ -1,3 +1,9 @@
+<svelte:head>
+	<title>Huxy | All notes</title>
+	<meta name="description" content="see all the notes you have here" />
+	<meta name="keywords" content="all-notes, notes, show-notes, all notes, my notes, all" />
+	<meta name="author" content="huxy notes" />
+</svelte:head>
 <div class="column-gap-3 columns-2 gap-x-3 px-4 *:break-inside-avoid-column">
 	<div class="mt-4 rounded-lg border border-gray-300 bg-gray-100 p-4 first:mt-0">
 		<p class="text-[12px] text-gray-500">27 MAR</p>

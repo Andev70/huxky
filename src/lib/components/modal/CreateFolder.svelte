@@ -1,4 +1,5 @@
 <script lang="ts">
+	import * as Select from '$lib/shadcn/ui/select';
 	import { enhance } from '$app/forms';
 	import * as Dialog from '$lib/shadcn/ui/dialog/';
 	import Button from '$lib/shadcn/ui/button/button.svelte';
@@ -8,6 +9,12 @@
 	import { toast } from 'svelte-sonner';
 	import { fade } from 'svelte/transition';
 	let selectedType: any = '';
+	$: selectedType = selectedType
+		? {
+				label: selectedType,
+				value: selectedType
+			}
+		: '';
 	let folderTitle = '';
 	let titleError = '';
 	let typeError = '';
@@ -22,6 +29,7 @@
 		{ value: 'pineapple', label: 'Pineapple' }
 	];
 	const onSubmit = ({ formData, cancel }: { formData: any; cancel: any }) => {
+		formData.append('type', selectedType);
 		const title = formData.get('title');
 		const type = formData.get('type');
 		if (title && type) {
@@ -67,18 +75,28 @@
 			</Dialog.Description>
 		</Dialog.Header>
 		<form class="w-full" action="?/createFolder" method="post" use:enhance={onSubmit}>
-			<div class="flex w-full flex-col gap-y-2">
+			<div class="relative flex w-full flex-col gap-y-2">
 				<Label class="" for="type">Folder type</Label>
-				<select
-					name="type"
-					id="type"
-					bind:value={selectedType}
-					class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 pr-3 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+				<Select.Root
+					selected={selectedType}
+					portal={null}
+					onSelectedChange={(v) => {
+						v && (selectedType = v?.value);
+					}}
 				>
-					{#each fruits as item}
-						<option value={item.value}>{item.label}</option>
-					{/each}
-				</select>
+					<Select.Trigger class="w-full">
+						<Select.Value placeholder="Select a type" />
+					</Select.Trigger>
+					<Select.Content>
+						<Select.Group>
+							<Select.Label>Fruits</Select.Label>
+							{#each fruits as fruit}
+								<Select.Item value={fruit.value} label={fruit.label}>{fruit.label}</Select.Item>
+							{/each}
+						</Select.Group>
+					</Select.Content>
+					<Select.Input name="favoriteFruit" />
+				</Select.Root>
 				<p class="text-[12px] text-red-300">{typeError ?? ''}</p>
 			</div>
 			<div class="title mt-3 flex w-full flex-col gap-y-2">
