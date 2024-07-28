@@ -47,11 +47,6 @@
 				<DropdownMenu.Shortcut>⇧⌘P</DropdownMenu.Shortcut>
 			</DropdownMenu.Item>
 			<DropdownMenu.Item>
-				<CreditCard class="mr-2 h-4 w-4" />
-				<span>Billing</span>
-				<DropdownMenu.Shortcut>⌘B</DropdownMenu.Shortcut>
-			</DropdownMenu.Item>
-			<DropdownMenu.Item>
 				<Settings class="mr-2 h-4 w-4" />
 				<span>Settings</span>
 				<DropdownMenu.Shortcut>⌘S</DropdownMenu.Shortcut>
@@ -75,10 +70,6 @@
 				</DropdownMenu.SubTrigger>
 				<DropdownMenu.SubContent>
 					<DropdownMenu.Item>
-						<Mail class="mr-2 h-4 w-4" />
-						<span>Email</span>
-					</DropdownMenu.Item>
-					<DropdownMenu.Item>
 						<MessageSquare class="mr-2 h-4 w-4" />
 						<span>Message</span>
 					</DropdownMenu.Item>
@@ -88,24 +79,11 @@
 					</DropdownMenu.Item>
 				</DropdownMenu.SubContent>
 			</DropdownMenu.Sub>
-			<DropdownMenu.Item>
-				<Plus class="mr-2 h-4 w-4" />
-				<span>New Team</span>
-				<DropdownMenu.Shortcut>⌘+T</DropdownMenu.Shortcut>
-			</DropdownMenu.Item>
 		</DropdownMenu.Group>
 		<DropdownMenu.Separator />
 		<DropdownMenu.Item>
-			<Github class="mr-2 h-4 w-4" />
-			<span>GitHub</span>
-		</DropdownMenu.Item>
-		<DropdownMenu.Item>
 			<LifeBuoy class="mr-2 h-4 w-4" />
 			<span>Support</span>
-		</DropdownMenu.Item>
-		<DropdownMenu.Item>
-			<Cloud class="mr-2 h-4 w-4" />
-			<span>API</span>
 		</DropdownMenu.Item>
 		<DropdownMenu.Separator />
 		<DropdownMenu.Item>
@@ -114,7 +92,7 @@
 				class="relative flex h-full w-full items-center gap-x-2"
 				method="post"
 			>
-				<LogOut class=" mr-2 h-4 w-4" />
+				<LogOut class=" ml-2 mr-2 h-4 w-4" />
 				<button type="submit" class="px h-full w-full text-left">Log out</button>
 				<DropdownMenu.Shortcut>⇧⌘Q</DropdownMenu.Shortcut>
 			</form>
