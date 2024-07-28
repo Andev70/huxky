@@ -3,15 +3,14 @@
 	import { page } from '$app/stores';
 	import { Ellipsis, Search } from 'lucide-svelte';
 	import avatar from '$lib/assets/avatars/IMG_20240725_224057.jpg';
+	import Dropdown from '$lib/components/dropdown.svelte';
 	export let data: any;
 </script>
 
 <main class="main sticky top-0 bg-white">
 	<nav class=" flex items-center justify-between px-3 py-4 font-Poppins">
 		<section class="user-image flex items-center gap-x-2">
-			<div class="img size-10 rounded-full">
-				<img class="size-full rounded-full" src={avatar} alt="avatar" />
-			</div>
+			<Dropdown />
 			<h3 class="user-name text-[16px]">{data?.username ?? ''}</h3>
 		</section>
 		<section class="search flex h-full items-center gap-x-2">

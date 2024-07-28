@@ -37,5 +37,14 @@ export const actions: Actions = {
 			}
 			redirect(302, '/');
 
-	}
+	},
+  logout:async({cookies})=>{
+  const token = cookies.get("key")
+    if (!token) {
+      redirect(302,"/login")
+    }
+    cookies.delete("key",{path:"/"})
+    redirect(302,"/login")
+  }
+
 };
