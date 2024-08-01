@@ -1,5 +1,2 @@
-const load = async () => {
-};
-export {
-  load
-};
+const load = async () => {};
+export { load };

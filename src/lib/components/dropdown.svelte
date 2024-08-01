@@ -3,13 +3,8 @@
 	import {
 		Keyboard,
 		CirclePlus,
-		Mail,
 		User,
-		Cloud,
-		CreditCard,
-		Github,
 		LifeBuoy,
-		Plus,
 		LogOut,
 		Users,
 		UserPlus,
@@ -87,13 +82,9 @@
 		</DropdownMenu.Item>
 		<DropdownMenu.Separator />
 		<DropdownMenu.Item>
-			<form
-				action="?/logout"
-				class="relative flex h-full w-full items-center gap-x-2"
-				method="post"
-			>
-				<LogOut class=" ml-2 mr-2 h-4 w-4" />
-				<button type="submit" class="px h-full w-full text-left">Log out</button>
+			<form action="?/logout" class=" flex h-full w-full items-center gap-x-2" method="post">
+				<LogOut class=" ml-[0.5px] size-5" />
+				<button type="submit" class=" h-full w-full text-left">Log out</button>
 				<DropdownMenu.Shortcut>⇧⌘Q</DropdownMenu.Shortcut>
 			</form>
 		</DropdownMenu.Item>

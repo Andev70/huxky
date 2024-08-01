@@ -7,7 +7,7 @@ declare global {
 		interface PageData {
 			state?: {
 				modal?: boolean;
-        form?:any
+				form?: any;
 			};
 		}
 		//interface PageState {}

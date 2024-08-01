@@ -3,7 +3,20 @@
 	import { enhance } from '$app/forms';
 	import * as Dialog from '$lib/shadcn/ui/dialog/';
 	import Button from '$lib/shadcn/ui/button/button.svelte';
-	import { Loader, PlusIcon } from 'lucide-svelte';
+	import {
+		BookPlus,
+		HousePlug,
+		GraduationCap,
+		Wallet,
+		Loader,
+		PlusIcon,
+		Play,
+		AudioLines,
+		Popcorn,
+		LandPlot,
+		IceCreamBowl,
+		ListCheck
+	} from 'lucide-svelte';
 	import Label from '$lib/shadcn/ui/label/label.svelte';
 	import Input from '$lib/shadcn/ui/input/input.svelte';
 	import { toast } from 'svelte-sonner';
@@ -21,12 +34,18 @@
 	let isPending = false;
 	$: if (selectedType) typeError = '';
 	$: if (folderTitle) titleError = '';
-	const fruits = [
-		{ value: 'apple', label: 'Apple' },
-		{ value: 'banana', label: 'Banana' },
-		{ value: 'blueberry', label: 'Blueberry' },
-		{ value: 'grapes', label: 'Grapes' },
-		{ value: 'pineapple', label: 'Pineapple' }
+	const notes = [
+		{ value: 'Sports', label: 'Sports' },
+		{ value: 'Book-List', label: 'Book List' },
+		{ value: 'Music-Playlist', label: 'Music Playlist' },
+		{ value: 'Homeworks', label: 'Homeworks' },
+		{ value: 'Grocery', label: 'Grocery' },
+		{ value: 'Study', label: 'Study' },
+		{ value: 'Sports', label: 'Sports' },
+		{ value: 'Money', label: 'Money' },
+		{ value: 'Videos', label: 'Videos' },
+		{ value: 'Todos', label: 'Todos' },
+		{ value: 'Others', label: 'Others' }
 	];
 	const onSubmit = ({ formData, cancel }: { formData: any; cancel: any }) => {
 		formData.append('type', selectedType.value);
@@ -89,9 +108,9 @@
 					</Select.Trigger>
 					<Select.Content>
 						<Select.Group>
-							<Select.Label>Fruits</Select.Label>
-							{#each fruits as fruit}
-								<Select.Item value={fruit.value} label={fruit.label}>{fruit.label}</Select.Item>
+							<Select.Label>Notes</Select.Label>
+							{#each notes as note}
+								<Select.Item value={note.value} label={note.label}>{note.label}</Select.Item>
 							{/each}
 						</Select.Group>
 					</Select.Content>
